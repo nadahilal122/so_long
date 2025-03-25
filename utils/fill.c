@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   flood_fill.c                                       :+:      :+:    :+:   */
+/*   fill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nahilal <nahilal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "../so_long.h"
 
-void	flood_fill(char **str, int x, int y, int len)
+void	fill(char **str, int x, int y, int len)
 {
 	if (y < len && str[y][x - 1] == '1' && str[y][x + 1] == '1'
 		&& str[y + 1][x] == '1' && str[y - 1][x] == '1' )

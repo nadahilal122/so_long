@@ -6,7 +6,7 @@
 /*   By: nahilal <nahilal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:35:09 by nahilal           #+#    #+#             */
-/*   Updated: 2025/03/25 20:19:00 by nahilal          ###   ########.fr       */
+/*   Updated: 2025/03/25 21:33:51 by nahilal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void printf_err(char **str,int len)
 {
 	write(2, "Error\n", 6);
 	write(2, "you display less/more than 2 argument !!\n", 41);
-	free_str(str,len);
 	exit(1);
 }
 
@@ -163,14 +162,14 @@ void check_player_Exit(char **str, int total_line)
 			else if(str[j][i] == 'P')
 			{
 				count_P++;
-				flood_fill(str, i, j,total_line);
+				fill(str, i, j,total_line);
 			}
 			else if(str[j][i] == 'E')
 			{	count_E++;
-				flood_fill(str, i, j,total_line);}
+				fill(str, i, j,total_line);}
 			else if(str[j][i] == 'C')
 			{	count_C++;
-				flood_fill(str, i, j,total_line);}
+				fill(str, i, j,total_line);}
 			else
 				map_err(str,total_line);
 			i++;
@@ -218,7 +217,8 @@ int main(int ac, char **av)
 		check_map(str,(i - 1));
 	}
 	else
-		printf_err(str,i);
+		printf_err(str,i -1);
+	close(fd);
 	free_str(str,i);
 	return(0);
 }
