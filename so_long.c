@@ -6,30 +6,43 @@
 /*   By: nahilal <nahilal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:35:09 by nahilal           #+#    #+#             */
-/*   Updated: 2025/03/25 04:53:54 by nahilal          ###   ########.fr       */
+/*   Updated: 2025/03/25 20:19:00 by nahilal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void printf_err(void)
+void free_str(char **str,int i)
+{
+	int j;
+
+	j = 0;
+	while(j <= i)
+		free(str[j]);
+	free(str);
+    exit(1);
+}
+void printf_err(char **str,int len)
 {
 	write(2, "Error\n", 6);
 	write(2, "you display less/more than 2 argument !!\n", 41);
+	free_str(str,len);
 	exit(1);
 }
 
-void map_err(void)
+void map_err(char **str,int len)
 {
 	write(2, "Error\n", 6);
 	write(2, "your map does not correct !!\n", 29);
+	free_str(str,len);
 	exit(1);
 }
 
-void map_len_err(void)
+void map_len_err(char **str,int len)
 {
 	write(2, "Error\n", 6);
 	write(2, "your map lines does not correct !!\n", 35);
+	free_str(str,len);
 	exit(1);
 }
 int valide_name(char *str)
@@ -76,7 +89,7 @@ void check_first_last_map(char **str,int len)
 		else if(str[len][i] == '\n')
 			break;
 		else
-			map_err();
+			map_err(str,len);
 	}
 }
 void check_left(char **str, int total_line)
@@ -89,7 +102,7 @@ void check_left(char **str, int total_line)
 		if(str[i][0] == '1')
 			i++;
 		else
-			map_err();
+			map_err(str,total_line);
 	}
 }
 void check_right(char **str, int total_line)
@@ -104,7 +117,7 @@ void check_right(char **str, int total_line)
 		if(str[i][j] == '1')
 			i++;
 		else
-			map_err();
+			map_err(str,total_line);
 	}
 
 }
@@ -120,7 +133,7 @@ void check_len(char **str, int total_line)
 		if(len == ft_strlen(str[i]))
 			i++;
 		else
-			map_len_err();
+			map_len_err(str,total_line);
 	}
 }
 void check_player_Exit(char **str, int total_line)
@@ -131,6 +144,8 @@ void check_player_Exit(char **str, int total_line)
 	int count_C;
 	int count_0;
 	int count_E;
+	int x;
+	int y;
 
 	count_P = 0;
 	count_C = 0;
@@ -147,21 +162,23 @@ void check_player_Exit(char **str, int total_line)
 				count_0++;
 			else if(str[j][i] == 'P')
 			{
-				flood_fill(str,i,j);
 				count_P++;
+				flood_fill(str, i, j,total_line);
 			}
 			else if(str[j][i] == 'E')
-				count_E++;
+			{	count_E++;
+				flood_fill(str, i, j,total_line);}
 			else if(str[j][i] == 'C')
-				count_C++;
+			{	count_C++;
+				flood_fill(str, i, j,total_line);}
 			else
-				map_err();
+				map_err(str,total_line);
 			i++;
 		}
 		j++;
 	}
 	if(count_P != 1 || count_E != 1 || count_C < 1 || count_0 == 0)
-		map_err();
+		map_err(str,total_line);
 	printf("ok");
 }
 void check_map(char **str, int total_line)
@@ -174,17 +191,7 @@ void check_map(char **str, int total_line)
 	check_player_Exit(str,total_line);	
 }
 
-void free_str(char **str,int i)
-{
-	int j;
 
-	j = 0;
-	while(j <= i)
-		free(str[j]);
-	free(str);
-	write(2, "Error\n : map too large\n", 23);
-    exit(1);
-}
 
 int main(int ac, char **av)
 {
@@ -202,11 +209,16 @@ int main(int ac, char **av)
 		while((str[i] = get_next_line(fd)) != NULL)
 		{
 			if(i >= 1024)
+			{
 				free_str(str,i);
+				map_err(str,i);
+			}
 			i++;	
 		}	
 		check_map(str,(i - 1));
 	}
 	else
-		printf_err();
+		printf_err(str,i);
+	free_str(str,i);
+	return(0);
 }

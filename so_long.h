@@ -6,7 +6,7 @@
 /*   By: nahilal <nahilal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:35:31 by nahilal           #+#    #+#             */
-/*   Updated: 2025/03/25 04:41:28 by nahilal          ###   ########.fr       */
+/*   Updated: 2025/03/25 20:17:21 by nahilal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@
 size_t	ft_strlen(const char *s);
 int	ft_strcmp(const char *s1, const char *s2);
 char	*ft_strrchr(const char *s, int c);
-void map_err(void);
-void flood_fill(char **str,int x, int y);
+void map_err(char **str,int len);
+void flood_fill(char **str,int x, int y,int len);
 #endif
