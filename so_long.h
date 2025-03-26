@@ -6,7 +6,7 @@
 /*   By: nahilal <nahilal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:35:31 by nahilal           #+#    #+#             */
-/*   Updated: 2025/03/25 22:58:57 by nahilal          ###   ########.fr       */
+/*   Updated: 2025/03/25 23:18:20 by nahilal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,5 @@ void	check_right(char **str, int total_line);
 void	check_first_last_map(char **str, int len);
 void	check_left(char **str, int total_line);
 void	check_player_exit(char **str, int total_line);
+void	check_max_fd(int fd, char **str, int i);
 #endif

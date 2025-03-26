@@ -18,7 +18,10 @@ void	free_str(char **str, int i)
 
 	j = 0;
 	while (j <= i)
-		free(str[j++]);
+	{
+		free(str[j]);
+		j++;
+	}
 	free(str);
 	exit(1);
 }

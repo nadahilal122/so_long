@@ -6,7 +6,7 @@
 /*   By: nahilal <nahilal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:35:09 by nahilal           #+#    #+#             */
-/*   Updated: 2025/03/25 22:58:30 by nahilal          ###   ########.fr       */
+/*   Updated: 2025/03/25 23:15:30 by nahilal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,32 +91,39 @@ void	check_player_exit(char **str, int total_line)
 		map_err(str, total_line);
 	printf("ok");
 }
+int	parsing(char **str,char **av)
+{
+	int	i;
+	int	fd;
 
+	i = 0;
+	fd = check_path(av[1]);
+	str = (char **)malloc(sizeof(char *) * (1024 + 1));
+	if (!str)
+		exit(1);
+	str[i] = get_next_line(fd);
+	while (str[i] != NULL)
+	{
+		check_max_fd(fd, str, i);
+		i++;
+		str[i] = get_next_line(fd);
+	}
+	check_map(str, (i - 1));
+	close(fd);
+	return (i);
+}
 int	main(int ac, char **av)
 {
 	int		i;
-	int		fd;
 	char	**str;
 
-	i = 0;
 	if (ac == 2)
 	{
-		fd = check_path(av[1]);
-		str = (char **)malloc(sizeof(char *) * (1024 + 1));
-		if (!str)
-			exit(1);
-		str[i] = get_next_line(fd);
-		while (str[i] != NULL)
-		{
-			check_max_fd(fd, str, i);
-			i++;
-			str[i] = get_next_line(fd);
-		}
-		check_map(str, (i - 1));
+		i = parsing(str,av);
 	}
 	else
 		printf_err(str, (i - 1));
-	close(fd);
-	free_str(str, i);
+	printf("i======>%d\n\n",i);
+	free_str(str,i);
 	return (0);
 }
