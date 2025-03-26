@@ -6,7 +6,7 @@
 /*   By: nahilal <nahilal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:35:09 by nahilal           #+#    #+#             */
-/*   Updated: 2025/03/26 20:32:47 by nahilal          ###   ########.fr       */
+/*   Updated: 2025/03/26 23:40:41 by nahilal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	check_map(char **str, int total_line)
 	check_right(str, total_line);
 	check_player_exit(str, total_line);
 }
-
 int	check_path(char *str)
 {
 	int	fd;
@@ -48,20 +47,11 @@ void	check_line(t_check *data, char **str, int total_line)
 			|| str[data->j][data->i] == '\n')
 			data->count_0++;
 		else if (str[data->j][data->i] == 'P')
-		{
 			data->count_p++;
-			fill(str, data->i, data->j, total_line);
-		}
 		else if (str[data->j][data->i] == 'E')
-		{
 			data->count_e++;
-			fill(str, data->i, data->j, total_line);
-		}
 		else if (str[data->j][data->i] == 'C')
-		{
 			data->count_c++;
-			fill(str, data->i, data->j, total_line);
-		}
 		else
 			map_err(str, total_line);
 		data->i++;
@@ -87,6 +77,13 @@ void	check_player_exit(char **str, int total_line)
 	if (data.count_p != 1 || data.count_e != 1
 		|| data.count_c < 1 || data.count_0 == 0)
 		map_err(str, total_line);
+	
+	char **copy;
+	
+	copy = malloc(sizeof(char *)* total_line);
+	if(!copy)
+		return;
+	
 	printf("ok");
 }
 

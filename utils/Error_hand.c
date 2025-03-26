@@ -6,7 +6,7 @@
 /*   By: nahilal <nahilal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 21:41:38 by nahilal           #+#    #+#             */
-/*   Updated: 2025/03/26 20:26:57 by nahilal          ###   ########.fr       */
+/*   Updated: 2025/03/26 20:47:00 by nahilal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	printf_err(void)
 void	map_err(char **str, int len)
 {
 	write(2, "Error\n", 6);
-	write(2, "your map does not correct !!\n", 29);
+	write(2, "your map is not correct !!\n", 27);
 	free_str(str, len);
 	exit(1);
 }

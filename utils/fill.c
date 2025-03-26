@@ -11,17 +11,14 @@
 /* ************************************************************************** */
 
 #include "../so_long.h"
-#include "../so_long.h"
 
-void	fill(char **str, int x, int y, int len)
+void	flood_fill(char **str, int x, int y)
 {
-	if (y < len && str[y][x - 1] == '1' && str[y][x + 1] == '1'
-		&& str[y + 1][x] == '1' && str[y - 1][x] == '1' )
-	{
-		write(2, "Error\n", 6);
-		write(2, "in your map ,", 13);
-		write(2, &str[y][x], 1);
-		write(2, " surrended by the wall", 22);
-		exit(1);
-	}
+	if(str[y][x] == '1' || str[y][x] == '+')
+		return;
+	str[y][x] = '+';
+	flood_fill(str,x - 1,y);
+	flood_fill(str,x + 1,y);
+	flood_fill(str,x,y - 1);
+	flood_fill(str,x,y + 1);
 }

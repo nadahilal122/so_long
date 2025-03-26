@@ -6,7 +6,7 @@
 /*   By: nahilal <nahilal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 21:43:52 by nahilal           #+#    #+#             */
-/*   Updated: 2025/03/26 20:32:50 by nahilal          ###   ########.fr       */
+/*   Updated: 2025/03/26 20:48:39 by nahilal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	check_len(char **str, int total_line)
 
 	i = 0;
 	len = ft_strlen(str[0]);
+	if(len == 0)
+		map_len_err(str, total_line);
 	while (i < total_line)
 	{
 		if (len == ft_strlen(str[i]))
