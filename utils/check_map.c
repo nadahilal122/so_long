@@ -6,26 +6,28 @@
 /*   By: nahilal <nahilal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 21:43:52 by nahilal           #+#    #+#             */
-/*   Updated: 2025/03/25 22:20:22 by nahilal          ###   ########.fr       */
+/*   Updated: 2025/03/26 20:32:50 by nahilal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-void	check_map(char **str, int total_line)
+int	valide_name(char *str)
 {
-	check_len(str, total_line);
-	check_first_last_map(str, 0);
-	check_first_last_map(str, total_line);
-	check_left(str, total_line);
-	check_right(str, total_line);
-	check_player_exit(str, total_line);
+	char	*s1 ;
+
+	s1 = ft_strrchr(str, '.');
+	if (!s1 || ft_strlen(s1) != ft_strlen(".ber"))
+		return (0);
+	if (ft_strcmp(s1, ".ber") != 0)
+		return (0);
+	return (1);
 }
 
 void	check_len(char **str, int total_line)
 {
-	int	i;
-	int	len;
+	int		i;
+	size_t	len;
 
 	i = 0;
 	len = ft_strlen(str[0]);

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../so_long.h"
+#include "../so_long.h"
 
 void	fill(char **str, int x, int y, int len)
 {

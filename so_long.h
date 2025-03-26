@@ -6,7 +6,7 @@
 /*   By: nahilal <nahilal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:35:31 by nahilal           #+#    #+#             */
-/*   Updated: 2025/03/25 23:18:20 by nahilal          ###   ########.fr       */
+/*   Updated: 2025/03/26 20:30:56 by nahilal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*ft_strrchr(const char *s, int c);
 void	map_err(char **str, int len);
 void	fill(char **str, int x, int y, int len);
 void	free_str(char **str, int i);
-void	printf_err(char **str, int len);
+void	printf_err(void);
 void	map_err(char **str, int len);
 void	map_len_err(char **str, int len);
 void	check_map(char **str, int total_line);
@@ -46,4 +46,5 @@ void	check_first_last_map(char **str, int len);
 void	check_left(char **str, int total_line);
 void	check_player_exit(char **str, int total_line);
 void	check_max_fd(int fd, char **str, int i);
+
 #endif

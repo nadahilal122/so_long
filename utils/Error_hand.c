@@ -6,7 +6,7 @@
 /*   By: nahilal <nahilal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 21:41:38 by nahilal           #+#    #+#             */
-/*   Updated: 2025/03/25 22:55:53 by nahilal          ###   ########.fr       */
+/*   Updated: 2025/03/26 20:26:57 by nahilal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ void	free_str(char **str, int i)
 
 	j = 0;
 	while (j <= i)
-	{
-		free(str[j]);
-		j++;
-	}
+		free(str[j++]);
 	free(str);
 	exit(1);
 }
@@ -36,7 +33,7 @@ void	check_max_fd(int fd, char **str, int i)
 	}
 }
 
-void	printf_err(char **str, int len)
+void	printf_err(void)
 {
 	write(2, "Error\n", 6);
 	write(2, "you display less/more than 2 argument !!\n", 41);

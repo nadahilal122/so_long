@@ -6,22 +6,20 @@
 /*   By: nahilal <nahilal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 20:35:09 by nahilal           #+#    #+#             */
-/*   Updated: 2025/03/25 23:15:30 by nahilal          ###   ########.fr       */
+/*   Updated: 2025/03/26 20:32:47 by nahilal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	valide_name(char *str)
+void	check_map(char **str, int total_line)
 {
-	char	*s1 ;
-
-	s1 = ft_strrchr(str, '.');
-	if (!s1 || ft_strlen(s1) != ft_strlen(".ber"))
-		return (0);
-	if (ft_strcmp(s1, ".ber") != 0)
-		return (0);
-	return (1);
+	check_len(str, total_line);
+	check_first_last_map(str, 0);
+	check_first_last_map(str, total_line);
+	check_left(str, total_line);
+	check_right(str, total_line);
+	check_player_exit(str, total_line);
 }
 
 int	check_path(char *str)
@@ -91,39 +89,34 @@ void	check_player_exit(char **str, int total_line)
 		map_err(str, total_line);
 	printf("ok");
 }
-int	parsing(char **str,char **av)
-{
-	int	i;
-	int	fd;
 
-	i = 0;
-	fd = check_path(av[1]);
-	str = (char **)malloc(sizeof(char *) * (1024 + 1));
-	if (!str)
-		exit(1);
-	str[i] = get_next_line(fd);
-	while (str[i] != NULL)
-	{
-		check_max_fd(fd, str, i);
-		i++;
-		str[i] = get_next_line(fd);
-	}
-	check_map(str, (i - 1));
-	close(fd);
-	return (i);
-}
 int	main(int ac, char **av)
 {
 	int		i;
+	int		fd;
 	char	**str;
 
+	i = 0;
+	fd = 0;
+	str = NULL;
 	if (ac == 2)
 	{
-		i = parsing(str,av);
+		fd = check_path(av[1]);
+		str = (char **)malloc(sizeof(char *) * (1024 + 1));
+		if (!str)
+			exit(1);
+		str[i] = get_next_line(fd);
+		while (str[i] != NULL)
+		{
+			check_max_fd(fd, str, i);
+			i++;
+			str[i] = get_next_line(fd);
+		}
+		check_map(str, (i - 1));
 	}
 	else
-		printf_err(str, (i - 1));
-	printf("i======>%d\n\n",i);
-	free_str(str,i);
+		printf_err();
+	close(fd);
+	free_str(str, i);
 	return (0);
 }
